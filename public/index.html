@@ -1,56 +1,43 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<title></title>
-    	<!-- Website Title & Description for Search Engine purposes -->
-        <title></title>
-        <meta name="description" content="">
-        
-        <!-- Mobile viewport optimized -->
+        <meta name="description" content="">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        
-        <!-- Bootstrap CSS -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
-        
-        <!-- Custom CSS -->
         <link href="includes/css/styles.css" rel="stylesheet">
-        
-        <!-- Include Modernizr in the head, before any other Javascript -->
         <script src="includes/js/modernizr-2.6.2.min.js"></script>
     </head>
     <body >
         <div class="container">
             <div class="head" style="align:center;">
             	<h1>Search Employee Details</h1>
+                   <button class="btn btn-primary search">SEARCH</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_modal">ADD</button>                          	
             </div>
             <div>
-            	<div>
-            		<!-- <input type="text" name="searchText" class="textClass" placeholder="Enter the movie name"> -->
-            		<button class="btn btn-primary search">SEARCH</button>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_modal">ADD</button>
+                <table class="table" id="my_table" align="center">
+                    <thead><tr id="row">
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>GENDER</th>
+                        <th>AGE</th>
+                        <th>EXPERIENCE</th>
+                        <th>EMAIL</th>
+                        <th>ADDRESS</th>
+                        <th>CONTACT NO.</th>
+                        <th>OPERATION</th>
+                    </tr></thead>
+                    <tbody id="myTable"></tbody>
+                </table>
+                <ul class="pagination pagination-lg no" style="text-align:center;">
                     
-
-            	</div>
+                </ul>
             </div>
 
-            <div>
-            <table class="table"id="myTable" align="center">
-                <tr>
-                    <th>ID</th>
-                    <th>NAME</th>
-                    <th>GENDER</th>
-                    <th>AGE</th>
-                    <th>EXPERIENCE</th>
-                    <th>EMAIL</th>
-                    <th>ADDRESS</th>
-                    <th>CONTACT NO.</th>
-                    <th>OPERATION</th>
-                </tr>
-            </table>
 
-            </div>
-            
+                <!-- MODAL WINDOW FOR ADD A RECORD -->
+
 
             <div class="modal fade" id="add_modal">
                 <div class="modal-dialog">
@@ -112,9 +99,7 @@
                 </div>
             </div>
 
-
-
-                <!--MODAL WINDOW FOR MODIFY  -->
+                <!-- MODAL WINDOW FOR MODIFICATION -->
 
 
         <div class="modal fade" id="modify_modal">
@@ -178,14 +163,7 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-            <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="http://code.jquery.com/jquery.js"></script>
     
     <!-- If no online access, fallback to our hardcoded version of jQuery -->
     <script>window.jQuery || document.write('<script src="includes/js/jquery-1.8.2.min.js"><\/script>')</script>
@@ -196,9 +174,6 @@
     <!-- Custom JS -->
     <script src="includes/js/script.js"></script>
     <script src="includes/js/add_script.js"></script>
-   
-    
-
         </div>
     </body>
 </html>
