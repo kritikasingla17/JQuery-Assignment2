@@ -15,14 +15,14 @@ Notes:	 Hand coded for Udemy.com
    -------------------------------------- */
    .head,form{
     text-align: center;
-    color:blue;
+    color:black;
 }
 .container{
-  color: white;
+  color: black;
 }
 
 .no{
-  align-items: center;
+  text-align: center;
 }
 
 
@@ -30,8 +30,8 @@ Notes:	 Hand coded for Udemy.com
     margin-top: 20px;
 }
 table, td {
-    background-color: black;
-    border: 2px solid blue;
+    background-color: white;
+    /*border: 2px  black;*/
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 30px;
@@ -39,7 +39,7 @@ table, td {
     font-weight: bold;
 }
 body{
-    background-color: black;
+    background-color: white;
     background: fixed;
 }
 
@@ -93,7 +93,7 @@ only screen and (max-width: 760px),
     
     td { 
         /* Behave  like a "row" */
-        border: none;
+        border: 1px;
         border-bottom: 1px solid #eee; 
         position: relative;
         padding-left: 50%; 

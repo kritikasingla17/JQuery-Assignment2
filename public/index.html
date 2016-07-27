@@ -12,10 +12,11 @@
         <div class="container">
             <div class="head" style="align:center;">
             	<h1>Search Employee Details</h1>
-                   <button class="btn btn-primary search">SEARCH</button>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_modal">ADD</button>                          	
+                    <button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#add_modal">ADD</button>                          	
             </div>
             <div>
+                <button class="previous">PREV</button>
+                <button class="pull-right next">NEXT</button>
                 <table class="table" id="my_table" align="center">
                     <thead><tr id="row">
                         <th>ID</th>
@@ -30,13 +31,12 @@
                     </tr></thead>
                     <tbody id="myTable"></tbody>
                 </table>
-                <ul class="pagination pagination-lg no" style="text-align:center;">
-                    
-                </ul>
+                <button class="previous">PREV</button>
+                <button class="pull-right next">NEXT</button>
             </div>
 
 
-                <!-- MODAL WINDOW FOR ADD A RECORD -->
+                <!-- MODAL WINDOW TO ADD A RECORD -->
 
 
             <div class="modal fade" id="add_modal">

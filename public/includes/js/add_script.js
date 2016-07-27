@@ -20,7 +20,7 @@ $(document).ready(function()
     		success: function(jsonData)
         	{
         		alert("added successfully");
-                location.reload();
+               // location.reload()
         	},
         	error: function()
         	{

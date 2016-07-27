@@ -1,16 +1,6 @@
 {
   "employee": [
     {
-      "name": "kjbk",
-      "gender": "kjbk",
-      "age": "jkjb",
-      "experience": "jkbjk",
-      "email": "bjk",
-      "address": "bkjb",
-      "contact no": 1234567889,
-      "id": 3
-    },
-    {
       "name": "Patton Kim",
       "gender": "male",
       "age": 24,
@@ -99979,6 +99969,46 @@
       "address": "129,Havens Place Franklin,New Jersey Mayotte",
       "contact no": "(971) 550-2918",
       "email": "alicehampton@katakana.com"
+    },
+    {
+      "name": "jkg",
+      "gender": "khvf",
+      "age": "kjvh",
+      "experience": "hv",
+      "email": "hv",
+      "address": "jhcj",
+      "contact no": "jhv",
+      "id": 10001
+    },
+    {
+      "name": "kritika",
+      "gender": "jhc",
+      "age": "jcj",
+      "experience": "jgc",
+      "email": "gx",
+      "address": "utxg",
+      "contact no": "cgjhcgj",
+      "id": 10002
+    },
+    {
+      "name": 1234,
+      "gender": "xxx",
+      "age": 9000,
+      "experience": "null",
+      "email": "",
+      "address": "",
+      "contact no": "",
+      "id": 10003
+    },
+    {
+      "name": "jbk",
+      "gender": "kjbkj",
+      "age": "kjbk",
+      "experience": "bkj",
+      "email": "kjb",
+      "address": "kjb",
+      "contact no": "kj",
+      "id": 10004
     }
   ]
 }
