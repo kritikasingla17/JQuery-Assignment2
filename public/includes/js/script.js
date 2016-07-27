@@ -1,7 +1,12 @@
-
 $(document).ready(function()
 {
+	
+
+
+
+
 	$(".previous").hide();
+	$("#lt").hide();
 	var strt=0;
 	var table = document.getElementById("myTable");
 	var modify_modal=document.getElementById("modify_modal");
@@ -21,6 +26,11 @@ $(document).ready(function()
 			alert('Error in Loading');
 		}
 	});
+
+
+	
+
+
 
 
 	function display(jsonData){
@@ -44,8 +54,12 @@ $(document).ready(function()
 
 
 
+	
+
+
 	$(".next").click(function(){
 		$(".previous").show();
+
 		strt=strt+10;
 		$.ajax({
 			type:'GET',
@@ -66,80 +80,235 @@ $(document).ready(function()
 
 
 
-		$(".previous").click(function(){
-			strt=strt-10;
-			if(strt==0)
+	
+
+
+
+	$(".previous").click(function(){
+		strt=strt-10;
+		if(strt==0)
+		{
+			$(".previous").hide();
+		}
+		$.ajax({
+			type:'GET',
+			url: 'http://localhost:8080/employee/?&_start='+strt+'&_limit=10', 
+			dataType:'json',
+			success: function(jsonData)
 			{
-				$(".previous").hide();
+				$("#my_table > tbody").empty();
+				display(jsonData);
+
+			},
+			error: function()
+			{
+				alert('Error in Loading');
+			}
+		});
+
+	});
+
+
+
+
+	
+
+
+	$(".modify").click(function(){
+		var id=this.id;
+
+		$("#modify").click(function(){
+			var dataItem={
+				name:$("#modify_name").val(),                            
+				gender:$("#modify_gender").val(),
+				age:$("#modify_age").val(),
+				experience:$("#modify_experience").val(),
+				email:$("#modify_email").val(),
+				address:$("#modify_address").val(),
+				["contact no"]:$("#modify_contact").val()
 			}
 			$.ajax({
-				type:'GET',
-				url: 'http://localhost:8080/employee/?&_start='+strt+'&_limit=10', 
+				type:'PUT',
+				url: 'http://localhost:8080/employee/'+id,
 				dataType:'json',
+				data:JSON.stringify(dataItem),
+				contentType: "application/json; charset=utf-8",
 				success: function(jsonData)
 				{
-					$("#my_table > tbody").empty();
-					display(jsonData);
-
+					alert("modify successfully");
 				},
 				error: function()
 				{
 					alert('Error in Loading');
 				}
 			});
-
 		});
+	});
 
+	
 
+	$("#gt").click(function(){
+		$("#lt").show();
+		var end=$("#gt").prev().text();
+		var begin=$("#gt").prev().text();
+		for(var j=1;j<11;j++){
+			end++;
+		}
 
+		console.log(begin);
+		$(".no > .list").remove();
+		for(var i=end;i>begin;i--){
+			//console.log(i);
+			$("#lt").after($('<li class="list"><a href="#">'+i+'</a></li>'));
+			 //$("img").after("<i>After</i>");
+			}
+			$(".list").click(function(){
+				var x=($(this).text());
+				x--;
+				x=x*10; 
+				console.log(x);
 
-		$(".modify").click(function(){
-			var id=this.id;
-
-			$("#modify").click(function(){
-				var dataItem={
-					name:$("#modify_name").val(),                            
-					gender:$("#modify_gender").val(),
-					age:$("#modify_age").val(),
-					experience:$("#modify_experience").val(),
-					email:$("#modify_email").val(),
-					address:$("#modify_address").val(),
-					["contact no"]:$("#modify_contact").val()
-				}
 				$.ajax({
-					type:'PUT',
-					url: 'http://localhost:8080/employee/'+id,
+					type:'GET',
+					url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
 					dataType:'json',
-					data:JSON.stringify(dataItem),
-					contentType: "application/json; charset=utf-8",
 					success: function(jsonData)
 					{
-						alert("modify successfully");
+						$("#my_table > tbody").empty();
+						display(jsonData);
+
 					},
 					error: function()
 					{
 						alert('Error in Loading');
 					}
 				});
+
+
 			});
+
+		});	
+
+
+
+	$(".list").click(function(){
+		var x=($(this).text());
+		x--;
+		x=x*10; 
+		console.log(x);
+
+		$.ajax({
+			type:'GET',
+			url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
+			dataType:'json',
+			success: function(jsonData)
+			{
+				$("#my_table > tbody").empty();
+				display(jsonData);
+
+			},
+			error: function()
+			{
+				alert('Error in Loading');
+			}
 		});
 
-		/*DELETE A ROW*/
-		$(".delete").click(function(){
-			var id=this.id;
-			$.ajax({
-				type:'DELETE',
-				url: 'http://localhost:8080/employee/'+id,
-				dataType:'json',
-				success: function(jsonData)
-				{
-					alert("deleted successfully");
-				},
-				error: function()
-				{
-					alert('Error in Loading');
-				}
-			});
-		});
 
 	});
+
+
+	/*           */
+
+	$("#lt").click(function(){
+		var end=$("#lt").next().text();
+		var begin=$("#lt").next().text();
+		for(var j=1;j<11;j++){
+			end--;
+		}
+		begin--;
+		console.log(end);
+		$(".no > .list").remove();
+		for(var i=begin;i>=end;i--){
+			//console.log(i);
+			$("#lt").after($('<li class="list"><a href="#">'+i+'</a></li>'));
+			 //$("img").after("<i>After</i>");
+			}
+			$(".list").click(function(){
+				var x=($(this).text());
+				x--;
+				x=x*10; 
+				console.log(x);
+
+				$.ajax({
+					type:'GET',
+					url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
+					dataType:'json',
+					success: function(jsonData)
+					{
+						$("#my_table > tbody").empty();
+						display(jsonData);
+
+					},
+					error: function()
+					{
+						alert('Error in Loading');
+					}
+				});
+
+
+			});
+			
+		});	
+
+	/*        */
+
+	$(".list").click(function(){
+		var x=($(this).text());
+		x--;
+		x=x*10; 
+		console.log(x);
+
+		$.ajax({
+			type:'GET',
+			url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
+			dataType:'json',
+			success: function(jsonData)
+			{
+				$("#my_table > tbody").empty();
+				display(jsonData);
+
+			},
+			error: function()
+			{
+				alert('Error in Loading');
+			}
+		});
+
+
+	});
+
+
+
+
+
+
+
+	/*DELETE A ROW*/
+	$(".delete").click(function(){
+		var id=this.id;
+		$.ajax({
+			type:'DELETE',
+			url: 'http://localhost:8080/employee/'+id,
+			dataType:'json',
+			success: function(jsonData)
+			{
+				alert("deleted successfully");
+			},
+			error: function()
+			{
+				alert('Error in Loading');
+			}
+		});
+	});
+
+});

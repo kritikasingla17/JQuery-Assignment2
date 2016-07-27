@@ -1,179 +1,193 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="description" content="">        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
-        <link href="includes/css/styles.css" rel="stylesheet">
-        <script src="includes/js/modernizr-2.6.2.min.js"></script>
-    </head>
-    <body >
-        <div class="container">
-            <div class="head" style="align:center;">
-            	<h1>Search Employee Details</h1>
-                    <button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#add_modal">ADD</button>                          	
-            </div>
-            <div>
-                <button class="previous">PREV</button>
-                <button class="pull-right next">NEXT</button>
-                <table class="table" id="my_table" align="center">
-                    <thead><tr id="row">
-                        <th>ID</th>
-                        <th>NAME</th>
-                        <th>GENDER</th>
-                        <th>AGE</th>
-                        <th>EXPERIENCE</th>
-                        <th>EMAIL</th>
-                        <th>ADDRESS</th>
-                        <th>CONTACT NO.</th>
-                        <th>OPERATION</th>
-                    </tr></thead>
-                    <tbody id="myTable"></tbody>
-                </table>
-                <button class="previous">PREV</button>
-                <button class="pull-right next">NEXT</button>
-            </div>
+<head>
+	<meta name="description" content="">        
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="includes/css/bootstrap-glyphicons.css" rel="stylesheet">
+	<link href="includes/css/styles.css" rel="stylesheet">
+	<script src="includes/js/modernizr-2.6.2.min.js"></script>
+</head>
+<body >
+	<div class="container">
+		<div class="head" style="align:center;">
+			<h1>Search Employee Details</h1>
+			<button class="btn btn-primary glyphicon glyphicon-pencil" data-toggle="modal" data-target="#add_modal">ADD</button>                             
+		</div>
+		<button class="previous pull-left">PREV</button>
+
+		<button class="pull-right next">NEXT</button>
+
+		<table class="table" id="my_table" align="center">
+			<thead><tr id="row">
+				<th>ID</th>
+				<th>NAME</th>
+				<th>GENDER</th>
+				<th>AGE</th>
+				<th>EXPERIENCE</th>
+				<th>EMAIL</th>
+				<th>ADDRESS</th>
+				<th>CONTACT NO.</th>
+				<th>OPERATION</th>
+			</tr></thead>
+			<tbody id="myTable"></tbody>
+		</table>
+		
+	</div>
+	<div >
+		<ul class="pagination no" >
+			<li id="lt">
+				<a href="#" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+			</li>
+			<li class="list"><a href="#">1</a></li>
+			<li class="list"><a href="#">2</a></li>
+			<li class="list"><a href="#">3</a></li>
+			<li class="list"><a href="#">4</a></li>
+			<li class="list"><a href="#">5</a></li>
+			<li class="list"><a href="#">6</a></li>
+			<li class="list"><a href="#">7</a></li>
+			<li class="list"><a href="#">8</a></li>
+			<li class="list"><a href="#">9</a></li>
+			<li class="list"><a href="#">10</a></li>
+			<li id="gt">
+				<a href="#" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div>
+
+		<!-- MODAL WINDOW TO ADD A RECORD -->
 
 
-                <!-- MODAL WINDOW TO ADD A RECORD -->
+		<div class="modal fade" id="add_modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times; </button>
+						<h3 class="modal-title">ADD DETAILS</h3>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="name" placeholder="Name" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="gender" placeholder="Gender" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="age" placeholder="Age" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="col-lg-10">
+								<input class="form-control" id="experience" placeholder="Experience" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="email" placeholder="Email" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="address" placeholder="Address" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="contact" placeholder="Contact" type="text">
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<a href="#" class="btn btn-default" data-dismiss="modal" id="add2">add</a>
+						<a href="#" class="btn btn-default" data-dismiss="modal">close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- MODAL WINDOW FOR MODIFICATION -->
 
 
-            <div class="modal fade" id="add_modal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times; </button>
-                            <h3 class="modal-title">ADD DETAILS</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label class="col-lg-2 control-label" for="name">Name</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="name" placeholder="Name" type="text">
-                                </div>
-                            </div>
-                              <div class="form-group">
-                                <label class="col-lg-2 control-label" for="gender">GENDER</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="gender" placeholder="Gender" type="text">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="col-lg-2 control-label" for="age">AGE</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="age" placeholder="Age" type="text">
-                                </div>
-                            </div>
-                              <div class="form-group">
-                                <label class="col-lg-2 control-label" for="experience">EXPERIENCE</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="experience" placeholder="Experience" type="text">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="col-lg-2 control-label" for="email">EMAIL</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="email" placeholder="Email" type="text">
-                                </div>
-                            </div>
-                              <div class="form-group">
-                                <label class="col-lg-2 control-label" for="address">ADDRESS</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="address" placeholder="Address" type="text">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="col-lg-2 control-label" for="contact">CONTACT</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="contact" placeholder="Contact" type="text">
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#" class="btn btn-default" data-dismiss="modal" id="add2">add</a>
-                            <a href="#" class="btn btn-default" data-dismiss="modal">close</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                <!-- MODAL WINDOW FOR MODIFICATION -->
+		<div class="modal fade" id="modify_modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times; </button>
+						<h3 class="modal-title">MODIFY DETAILS</h3>
+					</div>
+					<div class="modal-body ">
 
 
-        <div class="modal fade" id="modify_modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times; </button>
-                        <h3 class="modal-title">MODIFY DETAILS</h3>
-                    </div>
-                    <div class="modal-body ">
-                        
-                       
-                              <div class="form-group">
-                                <label class="col-lg-2 control-label" for="modify_name">Name</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="modify_name" placeholder="Name" type="text">
-                                </div>
-                            </div>
-                              <div class="form-group">
-                                <label class="col-lg-2 control-label" for="modify_gender">GENDER</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="modify_gender" placeholder="Gender" type="text">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="col-lg-2 control-label" for="modify_age">AGE</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="modify_age" placeholder="Age" type="text">
-                                </div>
-                            </div>
-                              <div class="form-group">
-                                <label class="col-lg-2 control-label" for="modify_experience">EXPERIENCE</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="modify_experience" placeholder="Experience" type="text">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="col-lg-2 control-label" for="modify_email">EMAIL</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="modify_email" placeholder="Email" type="text">
-                                </div>
-                            </div>
-                              <div class="form-group">
-                                <label class="col-lg-2 control-label" for="modify_address">ADDRESS</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="modify_address" placeholder="Address" type="text">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label class="col-lg-2 control-label" for="modify_contact">CONTACT</label>
-                                <div class="col-lg-10">
-                                    <input class="form-control" id="modify_contact" placeholder="Contact" type="text">
-                                </div>
-                            </div>
-                            
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn btn-default" data-dismiss="modal" id="modify">modify</a>
-                        <a href="#" class="btn btn-default" data-dismiss="modal">close</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="http://code.jquery.com/jquery.js"></script>
-    
-    <!-- If no online access, fallback to our hardcoded version of jQuery -->
-    <script>window.jQuery || document.write('<script src="includes/js/jquery-1.8.2.min.js"><\/script>')</script>
-    
-    <!-- Bootstrap JS -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="includes/js/script.js"></script>
-    <script src="includes/js/add_script.js"></script>
-        </div>
-    </body>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="modify_name" placeholder="Name" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="modify_gender" placeholder="Gender" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="modify_age" placeholder="Age" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="col-lg-10">
+								<input class="form-control" id="modify_experience" placeholder="Experience" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-10">
+								<input class="form-control" id="modify_email" placeholder="Email" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="col-lg-10">
+								<input class="form-control" id="modify_address" placeholder="Address" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+
+							<div class="col-lg-10">
+								<input class="form-control" id="modify_contact" placeholder="Contact" type="text">
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<a href="#" class="btn btn-default" data-dismiss="modal" id="modify">modify</a>
+						<a href="#" class="btn btn-default" data-dismiss="modal">close</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="http://code.jquery.com/jquery.js"></script>
+
+		<!-- If no online access, fallback to our hardcoded version of jQuery -->
+		<script>window.jQuery || document.write('<script src="includes/js/jquery-1.8.2.min.js"><\/script>')</script>
+
+		<!-- Bootstrap JS -->
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Custom JS -->
+		<script src="includes/js/script.js"></script>
+		<script src="includes/js/add_script.js"></script>
+	</div>
+</body>
 </html>
