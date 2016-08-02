@@ -1,314 +1,134 @@
-$(document).ready(function()
-{
-	
-
-
-
-
-	$(".previous").hide();
-	$("#lt").hide();
+var app = angular.module('myApp', []);
+app.controller('MyCntrl', function($scope, $http) {
 	var strt=0;
-	var table = document.getElementById("myTable");
-	var modify_modal=document.getElementById("modify_modal");
-	
-	$.ajax({
-		type:'GET',
-		url: 'http://localhost:8080/employee/?&_start=0&_limit=10', 
-		dataType:'json',
-		success: function(jsonData)
+	$scope.searchAll=function(){
+		$http.get("http://localhost:8080/employee/?_start="+strt+"&_limit=20")
+		.success(function(response) {$scope.names = response;
+		});
+	};
+	$scope.next=function(){
+		strt=strt+20;
+		if($scope.help==undefined){
+			$scope.searchAll();
+		}
+		else
 		{
-			
-			display(jsonData);
-			
+			$scope.search();
+		}
+	};
+	$scope.prev=function(){
+		strt=strt-20;
+		if($scope.help==undefined){
+			$scope.searchAll();
+		}
+		else
+		{
+			$scope.search();
+		}
+	};
+	$scope.search=function(){
+		$http.get("http://localhost:8080/employee/?q="+$scope.help+"&_start="+strt+"&_limit=20")
+		.success(function(response) {$scope.names = response;
+		});
+	};
+	$scope.addRow = function(){
+		var dataItem={
+			name:$scope.name,
+			gender:$scope.gender,
+			age:$scope.age,
+			experience:$scope.experience,
+			email:$scope.email,
+			address:$scope.address,
+			contact:$scope.contact
+		}
+		return $http({
+			method: 'POST',
+			url: 'http://localhost:8080/employee/',
+			dataType:'json',
+			data:JSON.stringify(dataItem),
+			contentType: "application/json; charset=utf-8"
+		}).then(function successCallback(response) {
+			alert("get");
+			$scope.name='';
+			$scope.gender='';
+			$scope.age='';
+			$scope.experience='';
+			$scope.email='';
+			$scope.address='';
+			$scope.contact='';
 		},
-		error: function()
-		{
-			alert('Error in Loading');
-		}
-	});
-
-
-	
-
-
-
-
-	function display(jsonData){
-		$(jsonData).each(function(i,val)
-		{
-
-			var row = table.insertRow();
-			row.insertCell(0).innerHTML=jsonData[i].id;
-			row.insertCell(1).innerHTML=jsonData[i].name;
-			row.insertCell(2).innerHTML=jsonData[i].gender;
-			row.insertCell(3).innerHTML=jsonData[i].age;
-			row.insertCell(4).innerHTML=jsonData[i].experience;
-			row.insertCell(5).innerHTML=jsonData[i].email;
-			row.insertCell(6).innerHTML=jsonData[i].address;
-			row.insertCell(7).innerHTML=jsonData[i]["contact no"];
-
-			row.insertCell(8).innerHTML='<button class="btn btn-default modify glyphicon glyphicon-file" id="'+jsonData[i].id+'" data-toggle="modal" data-target="#modify_modal">modify</button><button class="btn btn-danger delete glyphicon glyphicon-trash" id="'+jsonData[i].id+'">delete</button>'                                               
-
+		function errorCallback(response) {
+			alert("not get");
+			$scope.name='';
+			$scope.gender='';
+			$scope.age='';
+			$scope.experience='';
+			$scope.email='';
+			$scope.address='';
+			$scope.contact='';
 		});
-	}
-
-
-
-	
-
-
-	$(".next").click(function(){
-		$(".previous").show();
-
-		strt=strt+10;
-		$.ajax({
-			type:'GET',
-			url: 'http://localhost:8080/employee/?&_start='+strt+'&_limit=10', 
-			dataType:'json',
-			success: function(jsonData)
-			{
-				$("#my_table > tbody").empty();
-				display(jsonData);
-
-			},
-			error: function()
-			{
-				alert('Error in Loading');
-			}
-		});
-	});
-
-
-
-	
-
-
-
-	$(".previous").click(function(){
-		strt=strt-10;
-		if(strt==0)
-		{
-			$(".previous").hide();
-		}
-		$.ajax({
-			type:'GET',
-			url: 'http://localhost:8080/employee/?&_start='+strt+'&_limit=10', 
-			dataType:'json',
-			success: function(jsonData)
-			{
-				$("#my_table > tbody").empty();
-				display(jsonData);
-
-			},
-			error: function()
-			{
-				alert('Error in Loading');
-			}
-		});
-
-	});
-
-
-
-
-	
-
-
-	$(".modify").click(function(){
-		var id=this.id;
-
-		$("#modify").click(function(){
-			var dataItem={
-				name:$("#modify_name").val(),                            
-				gender:$("#modify_gender").val(),
-				age:$("#modify_age").val(),
-				experience:$("#modify_experience").val(),
-				email:$("#modify_email").val(),
-				address:$("#modify_address").val(),
-				["contact no"]:$("#modify_contact").val()
-			}
-			$.ajax({
-				type:'PUT',
-				url: 'http://localhost:8080/employee/'+id,
-				dataType:'json',
-				data:JSON.stringify(dataItem),
-				contentType: "application/json; charset=utf-8",
-				success: function(jsonData)
-				{
-					alert("modify successfully");
-				},
-				error: function()
-				{
-					alert('Error in Loading');
-				}
-			});
-		});
-	});
-
-	
-
-	$("#gt").click(function(){
-		$("#lt").show();
-		var end=$("#gt").prev().text();
-		var begin=$("#gt").prev().text();
-		for(var j=1;j<11;j++){
-			end++;
-		}
-
-		console.log(begin);
-		$(".no > .list").remove();
-		for(var i=end;i>begin;i--){
-			//console.log(i);
-			$("#lt").after($('<li class="list"><a href="#">'+i+'</a></li>'));
-			 //$("img").after("<i>After</i>");
-			}
-			$(".list").click(function(){
-				var x=($(this).text());
-				x--;
-				x=x*10; 
-				console.log(x);
-
-				$.ajax({
-					type:'GET',
-					url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
-					dataType:'json',
-					success: function(jsonData)
-					{
-						$("#my_table > tbody").empty();
-						display(jsonData);
-
-					},
-					error: function()
-					{
-						alert('Error in Loading');
-					}
-				});
-
-
-			});
-
-		});	
-
-
-
-	$(".list").click(function(){
-		var x=($(this).text());
-		x--;
-		x=x*10; 
-		console.log(x);
-
-		$.ajax({
-			type:'GET',
-			url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
-			dataType:'json',
-			success: function(jsonData)
-			{
-				$("#my_table > tbody").empty();
-				display(jsonData);
-
-			},
-			error: function()
-			{
-				alert('Error in Loading');
-			}
-		});
-
-
-	});
-
-
-	/*           */
-
-	$("#lt").click(function(){
-		var end=$("#lt").next().text();
-		var begin=$("#lt").next().text();
-		for(var j=1;j<11;j++){
-			end--;
-		}
-		begin--;
-		console.log(end);
-		$(".no > .list").remove();
-		for(var i=begin;i>=end;i--){
-			//console.log(i);
-			$("#lt").after($('<li class="list"><a href="#">'+i+'</a></li>'));
-			 //$("img").after("<i>After</i>");
-			}
-			$(".list").click(function(){
-				var x=($(this).text());
-				x--;
-				x=x*10; 
-				console.log(x);
-
-				$.ajax({
-					type:'GET',
-					url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
-					dataType:'json',
-					success: function(jsonData)
-					{
-						$("#my_table > tbody").empty();
-						display(jsonData);
-
-					},
-					error: function()
-					{
-						alert('Error in Loading');
-					}
-				});
-
-
-			});
-			
-		});	
-
-	/*        */
-
-	$(".list").click(function(){
-		var x=($(this).text());
-		x--;
-		x=x*10; 
-		console.log(x);
-
-		$.ajax({
-			type:'GET',
-			url: 'http://localhost:8080/employee/?&_start='+x+'&_limit=10', 
-			dataType:'json',
-			success: function(jsonData)
-			{
-				$("#my_table > tbody").empty();
-				display(jsonData);
-
-			},
-			error: function()
-			{
-				alert('Error in Loading');
-			}
-		});
-
-
-	});
-
-
-
-
-
-
-
-	/*DELETE A ROW*/
-	$(".delete").click(function(){
-		var id=this.id;
-		$.ajax({
-			type:'DELETE',
+	};
+	$scope.delete = function(id){
+		return $http({
+			method: 'DELETE',
 			url: 'http://localhost:8080/employee/'+id,
-			dataType:'json',
-			success: function(jsonData)
-			{
-				alert("deleted successfully");
-			},
-			error: function()
-			{
-				alert('Error in Loading');
-			}
+		}).then(function successCallback(response) {
+			alert("delete");
+			$scope.search();
+		},
+		function errorCallback(response) {
+			alert("not delete");
 		});
-	});
+	};
+	var x;
+	$scope.modify=function(y){
+		x=y.id;
+		console.log(y.name);
 
+		$scope.name1=y.name;
+		$scope.gender1=y.gender;
+		$scope.age1=y.age
+		$scope.experience1=y.experience;
+		$scope.email1=y.email;
+		$scope.address1=y.address;
+		$scope.contact1=y.contact;
+	};
+	$scope.modifyRow = function(){
+		var dataItem={
+			name:$scope.name1,
+			gender:$scope.gender1,
+			age:$scope.age1,
+			experience:$scope.experience1,
+			email:$scope.email1,
+			address:$scope.address1,
+			contact:$scope.contact1
+		}
+		return $http({
+			method: 'PUT',
+			url: 'http://localhost:8080/employee/'+x,
+			dataType:'json',
+			data:JSON.stringify(dataItem),
+			contentType: "application/json; charset=utf-8"
+		}).then(function successCallback(response) {
+			alert("modified");
+			$scope.search();
+			$scope.name1='';
+			$scope.gender1='';
+			$scope.age1='';
+			$scope.experience1='';
+			$scope.email1='';
+			$scope.address1='';
+			$scope.contact1='';
+		},
+		function errorCallback(response) {
+			alert("not modified");
+			$scope.name1='';
+			$scope.gender1='';
+			$scope.age1='';
+			$scope.experience1='';
+			$scope.email1='';
+			$scope.address1='';
+			$scope.contact1='';
+		});
+	};
 });
