@@ -13,10 +13,7 @@ Notes:	 Hand coded for Udemy.com
 /* --------------------------------------
    Layout
    -------------------------------------- */
-   .modal-footer{
-      margin-top: 250px;
-   }
-   .head,form{
+      .head,form{
     text-align: center;
     color:black;
 }

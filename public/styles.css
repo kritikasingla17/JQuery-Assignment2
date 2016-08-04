@@ -1,0 +1,17 @@
+.head,form{
+    text-align: center;
+    color:black;
+}
+table, td {
+    background-color: white;
+    border: 1px  black;
+    /* padding-top: 15px; */
+    /* padding-bottom: 15px; */
+    padding-left: 30px;
+    padding-right: 30px;
+    /*font-weight: bold;*/
+}
+body{
+    background-color: white;
+    background: fixed;
+}
